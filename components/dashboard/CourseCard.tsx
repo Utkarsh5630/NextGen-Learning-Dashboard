@@ -20,36 +20,89 @@ export function CourseCard({ course, index }: CourseCardProps) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ ...springTransition, delay: 0.2 + index * 0.08 }}
+
       whileHover={{
-        scale: 1.02,
+        scale: 1.04,
+        y: -6,
         boxShadow:
-          "0 0 0 1px rgba(167,139,250,0.25), 0 12px 40px rgba(124,58,237,0.15)",
+          "0 25px 80px -25px rgba(139,92,246,0.45)",
       }}
-      className="group relative min-h-[220px] overflow-hidden rounded-3xl border border-white/10 bg-surface-raised p-5 shadow-card transition-[border-color,box-shadow] duration-300 hover:border-violet-500/30"
+
+      whileTap={{ scale: 0.98 }}
+
+      className="
+        group relative min-h-[220px] overflow-hidden rounded-3xl
+        border border-white/10 bg-surface-raised p-5 shadow-card
+
+        transition-all duration-300 ease-out
+        hover:border-violet-400/40
+      "
+
       style={{ willChange: "transform" }}
     >
+      {/* Glow background (NEW) */}
+      <div
+        className="
+          absolute inset-0 opacity-0
+          bg-gradient-to-br from-violet-500/20 via-transparent to-cyan-500/10
+          transition-opacity duration-300
+          group-hover:opacity-100
+          pointer-events-none
+        "
+      />
+
+      {/* animated top line */}
+      <div className="absolute top-0 left-0 h-[2px] w-0 bg-violet-400 transition-all duration-300 group-hover:w-full" />
+
+      {/* texture layer */}
       <div className="mesh-gradient grain-texture absolute inset-0" aria-hidden />
 
       <div className="relative z-10">
+        {/* header */}
         <div className="mb-5 flex items-center justify-between">
           <div
-            className="rounded-2xl p-2.5"
+            className="
+              rounded-2xl p-2.5
+              transition-transform duration-300
+              group-hover:scale-110
+            "
             style={{ backgroundColor: `${accent}22` }}
           >
-            <Icon className="h-5 w-5" style={{ color: accent }} aria-hidden />
+            <Icon
+              className="
+                h-5 w-5 transition-transform duration-300
+                group-hover:scale-110
+              "
+              style={{ color: accent }}
+              aria-hidden
+            />
           </div>
+
           <span
-            className="text-sm font-medium tabular-nums"
+            className="
+              text-sm font-medium tabular-nums
+              transition-transform duration-300
+              group-hover:scale-110
+            "
             style={{ color: accent }}
           >
             {progress}%
           </span>
         </div>
 
-        <h3 className="mb-5 text-lg font-semibold leading-snug text-ink">
+        {/* title */}
+        <h3
+          className="
+            mb-5 text-lg font-semibold leading-snug text-ink
+
+            transition-all duration-300
+            group-hover:translate-x-1
+          "
+        >
           {course.title}
         </h3>
 
+        {/* progress */}
         <div
           className="h-2 overflow-hidden rounded-full bg-white/10"
           role="progressbar"
